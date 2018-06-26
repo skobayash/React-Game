@@ -18,6 +18,7 @@ function randomizeChars(arr) {
 };
 
 
+// Main App Component
 class App extends Component {
 
   state = {

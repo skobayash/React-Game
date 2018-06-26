@@ -19,6 +19,7 @@
 .navbar {
     font-family: 'Titan One', cursive;
     font-size: 35px;
+    border-bottom: 1px solid black;
 }
 
 .score-num {

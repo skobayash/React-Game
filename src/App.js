@@ -4,7 +4,7 @@ import './App.css';
 // Components
 import Card from "./components/Card";
 import Wrapper from "./components/Wrapper";
-import Title from "./components/Title";
+import Nav from "./components/Nav";
 import characters from "./characters.json";
 
 
@@ -23,7 +23,8 @@ class App extends Component {
   state = {
     characters: characters,
     score: 0,
-    topscore: 0
+    topscore: 0,
+    winloss: ""
   };
 
   // Invoking randomization of characters
@@ -34,14 +35,17 @@ class App extends Component {
   };
 
   restartGame = () => {
-    if (this.state.score > this.state.topscore) {
+    if (this.state.score === 15) {
+      this.setState({ winloss: "You win!" });
+      this.setState({ topscore: this.state.score })
+      console.log("Topscore: " + this.state.topscore);
+    } else if (this.state.score > this.state.topscore) {
       this.setState({ topscore: this.state.score })
       console.log("Topscore: " + this.state.topscore);
     }
     this.state.characters.forEach(character => character.count = 0);
     this.setState({ score: 0 })
     console.log("Restarting game.")
-    // this.randomizeDisplay();
   }
 
   clickCount = id => {
@@ -50,7 +54,7 @@ class App extends Component {
         console.log("Guess: " + guess.id)
         if(characters[i].count === 0){
           characters[i].count = characters[i].count + 1;
-          this.setState({score : this.state.score + 1}, function(){
+          this.setState({ score : this.state.score + 1, winloss: "" }, function(){
             console.log("Current score: " + this.state.score);
           });
           this.randomizeDisplay()
@@ -58,6 +62,8 @@ class App extends Component {
         } 
         else {
           this.restartGame();
+          this.setState({ winloss: "You Lose! Try Again." });
+          console.log("YOU LOSE")
         }
       }
     });
@@ -67,16 +73,17 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>Clicky Game</Title>
+        <Nav score={this.state.score} topscore={this.state.topscore} winloss={this.state.winloss} ></Nav>
         <div className="container">
-          {this.state.characters.map(character => (
-            <Card
-              id={character.id}
-              key={character.id}
-              image={character.image}
-              clickCount={this.clickCount}
-            />
-          ))}
+            {this.state.characters.map(character => (
+              <Card
+                id={character.id}
+                key={character.id}
+                image={character.image}
+                clickCount={this.clickCount}
+              />
+            ))}
+          <div className="bgoverlay"></div>
         </div>
       </Wrapper>
     );

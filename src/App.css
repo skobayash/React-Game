@@ -31,3 +31,8 @@
   display: flex;   
   flex-wrap: wrap;
 }
+
+.bg-overlay {
+  background-image: url("https://image.ibb.co/niL0Ko/archer_vice.png");
+  position: absolute;
+}

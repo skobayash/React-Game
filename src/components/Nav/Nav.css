@@ -1,0 +1,30 @@
+.score-display {
+    display: block;
+}
+
+.archer-logo {
+    width: 700px;
+    height: auto;
+}
+
+.score-img {
+    height: 35px;
+}
+
+.score-holder {
+    padding-top: 25px;
+    margin-left: 100px;
+}
+
+.navbar {
+    font-family: 'Titan One', cursive;
+    font-size: 35px;
+}
+
+.score-num {
+    margin-bottom: 5px;
+}
+
+.win-loss {
+    margin-left: 150px;
+}

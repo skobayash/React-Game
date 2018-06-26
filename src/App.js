@@ -36,11 +36,7 @@ class App extends Component {
   };
 
   restartGame = () => {
-    if (this.state.score === 15) {
-      this.setState({ winloss: "You win!" });
-      this.setState({ topscore: this.state.score })
-      console.log("Topscore: " + this.state.topscore);
-    } else if (this.state.score > this.state.topscore) {
+    if (this.state.score > this.state.topscore) {
       this.setState({ topscore: this.state.score })
       console.log("Topscore: " + this.state.topscore);
     }
@@ -57,13 +53,17 @@ class App extends Component {
           characters[i].count = characters[i].count + 1;
           this.setState({ score : this.state.score + 1, winloss: "" }, function(){
             console.log("Current score: " + this.state.score);
+            if (this.state.score === characters.length) {
+              this.setState({ winloss: "You win! Click any image to play again." })
+              this.restartGame();
+            }
           });
           this.randomizeDisplay()
           return true; 
         } 
         else {
           this.restartGame();
-          this.setState({ winloss: "You Lose! Try Again." });
+          this.setState({ winloss: "You Lose! Click any image to play again." });
           console.log("YOU LOSE")
         }
       }
